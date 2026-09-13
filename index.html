@@ -5,54 +5,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Privacy Policy — Quenly</title>
   <meta name="description" content="Privacy Policy for Quenly. Personal wellness logging with on-device encryption. Not a medical device." />
+  <meta name="robots" content="index,follow" />
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif; background:#0F172A; color:#F8FAFC; line-height:1.65; padding:24px 16px 64px; }
-    .wrap { max-width:680px; margin:0 auto; }
-    h1 { font-size:28px; margin-bottom:8px; }
-    h2 { font-size:18px; color:#38BDF8; margin:28px 0 10px; }
-    p, li { color:#E2E8F0; font-size:15px; }
-    .meta { color:#94A3B8; font-size:14px; }
-    a { color:#38BDF8; }
-    .notice { border-left:3px solid #38BDF8; padding:14px 16px; margin:24px 0; background:rgba(56,189,248,.08); }
+    :root { --bg:#F7F4EE; --ink:#1C2430; --muted:#5C6570; --navy:#0F2744; --teal:#2A6B66; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.65; }
+    header { background:var(--navy); color:#fff; padding:28px 20px 24px; }
+    .wrap { max-width:720px; margin:0 auto; padding:0 20px 72px; }
+    header .wrap { padding-bottom:0; }
+    h1 { font-size:28px; margin:0 0 8px; letter-spacing:-0.02em; }
+    h2 { font-size:18px; color:var(--navy); margin:32px 0 8px; }
+    p, li { font-size:16px; }
+    .meta { color:#C9D4DE; font-size:14px; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif; }
+    a { color:var(--teal); }
+    .notice { border-left:3px solid var(--teal); padding:14px 16px; margin:24px 0; background:#fff; }
+    ul { padding-left:1.2em; }
+    footer { font-size:13px; color:var(--muted); margin-top:40px; }
+    code { font-size:14px; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Privacy Policy — Quenly</h1>
-    <p class="meta">Last updated: September 7, 2026 · App: com.briteenceladus.bptracker · Contact: stellarmatrixai@gmail.com</p>
-    <p><strong>Personal wellness logging — not a medical device.</strong> Data you enter (blood pressure, heart rate, glucose, medications, notes) is encrypted on your device (AES-256-GCM). Quenly does not run a backend database of your health readings.</p>
+  <header>
+    <div class="wrap">
+      <h1>Privacy Policy — Quenly</h1>
+      <p class="meta">Last updated: September 12, 2026 · App: com.briteenceladus.bptracker · Contact: stellarmatrixai@gmail.com</p>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="notice">
+      <strong>Personal wellness logging — not a medical device.</strong>
+      Quenly does not diagnose, treat, cure, or prevent any medical condition.
+      Talk to a licensed clinician about your readings.
+    </div>
+    <p>You enter wellness data (blood pressure, heart rate, glucose, medications, notes). That health data is encrypted on your device (AES-256-GCM). Quenly does not operate a server-side database of your readings.</p>
+    <p>Optional features may contact third parties for identity, purchases, or app updates. Those paths do not send your health readings to Google or to Quenly servers.</p>
     <h2>1. Data you enter (on-device)</h2>
+    <p>Stored only on your device, encrypted at rest with AES-256-GCM:</p>
     <ul>
-      <li>Blood pressure and heart rate readings</li>
-      <li>Glucose readings</li>
-      <li>Medication list you enter</li>
-      <li>App settings and encryption material (salt + password verifier)</li>
+      <li>Blood pressure and heart rate readings (systolic, diastolic, pulse, timestamp, optional notes)</li>
+      <li>Glucose readings (value, context tags, timestamp, optional notes)</li>
+      <li>Medication list you enter (name, dosage, frequency, status)</li>
+      <li>App settings (auto-lock, reminders, biometric preference, display preferences)</li>
+      <li>Encryption material needed to protect the above (salt + password verifier)</li>
     </ul>
-    <p>Your master password is never stored in plaintext. Biometric unlock is local convenience only. There is no password recovery.</p>
+    <p>Your master password is never stored in plaintext. Biometric unlock (Face ID / fingerprint) is a local convenience feature only; it is not a cryptographic root of trust. There is no password recovery. If you forget the master password, encrypted data cannot be recovered.</p>
     <h2>2. Optional Google Sign-In</h2>
-    <p>If you sign in with Google, identity such as email/name/sub may be stored on device. Health readings are not uploaded to Google or Quenly servers. Sign-in does not replace the master password.</p>
+    <p>If you choose Sign in with Google, Google OAuth provides identity information such as email, name, and subject (sub) to the app on your device. This is for optional account identity only.</p>
+    <ul>
+      <li>Health readings are not uploaded to Google or to Quenly servers as part of sign-in.</li>
+      <li>Google Sign-In does not replace your master password for unlocking encrypted local data.</li>
+    </ul>
     <h2>3. Optional Quenly Pro (Google Play Billing)</h2>
-    <p>Purchases are handled by Google Play. The app keeps a local premium flag. Health readings are not sent as part of billing.</p>
+    <p>If you purchase Quenly Pro, Google Play Billing handles the transaction and purchase tokens. The app keeps a local premium flag so Pro features unlock on device. Health readings are not sent to Google as part of billing.</p>
     <h2>4. Expo Updates (OTA)</h2>
-    <p>The app may contact Expo to download app updates. That is not a health-data upload.</p>
-    <h2>5. AI insights</h2>
-    <p>Optional AI insights are disabled in this build. They are not active today.</p>
+    <p>The app may contact Expo servers to check for and download JavaScript/asset updates (EAS Update). That traffic is for app updates, not for uploading your health readings.</p>
+    <h2>5. Parked AI insights (currently off)</h2>
+    <p>An optional AI insights feature is disabled in this build (<code>AI_INSIGHTS_AVAILABLE = false</code>). It is not active today. If it were ever enabled and you opted in, the app would send a minimal anonymized numbers-only summary from your device. That path is not on.</p>
     <h2>6. What we do not do</h2>
     <ul>
       <li>No advertising SDKs</li>
-      <li>No analytics SDKs for product analytics</li>
-      <li>No Quenly server database of health readings</li>
+      <li>No analytics or crash-reporting SDKs bundled for product analytics</li>
+      <li>No Quenly backend database that stores your health readings</li>
       <li>No sale of personal health data</li>
     </ul>
     <h2>7. Exports you initiate</h2>
-    <p>CSV, PDF, and encrypted backups leave the app only when you start them.</p>
+    <p>CSV, PDF, and encrypted backup exports happen only when you start them. Exported files leave the app’s encrypted store under your control. CSV exports are plaintext for spreadsheet use — you are responsible for those files.</p>
     <h2>8. Deletion</h2>
-    <p>Settings → Clear All Data, or uninstall the app.</p>
+    <ul>
+      <li>In-app: Settings → Clear All Data</li>
+      <li>Uninstall: removing the app removes its local data on the device (subject to normal OS behavior)</li>
+    </ul>
     <h2>9. Children</h2>
-    <p>Quenly is not directed at children under 13.</p>
-    <div class="notice"><strong>Not a medical device.</strong> Quenly does not diagnose, treat, cure, or prevent disease. Talk to a clinician about your health.</div>
-    <h2>10. Contact</h2>
+    <p>Quenly is not directed at children under 13. We do not knowingly collect personal information from children under 13.</p>
+    <h2>10. Not a medical device</h2>
+    <p>Quenly is a personal wellness and logging tool only. Category labels and charts are educational aids for reviewing your own log. They are not a diagnosis.</p>
+    <h2>11. Changes</h2>
+    <p>If this policy changes, the “Last updated” date will be revised. Continued use after changes constitutes acceptance of the updated policy.</p>
+    <h2>12. Contact</h2>
     <p><a href="mailto:stellarmatrixai@gmail.com">stellarmatrixai@gmail.com</a></p>
-  </div>
+    <footer>Play Console: paste this page URL into the privacy policy field. Host it as public HTML (not a PDF), without a geo-block or login wall.</footer>
+  </main>
 </body>
 </html>
