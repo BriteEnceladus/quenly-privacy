@@ -28,7 +28,8 @@
   <header>
     <div class="wrap">
       <h1>Privacy Policy — Quenly</h1>
-      <p class="meta">Last updated: October 1, 2026 · App: com.briteenceladus.bptracker · Contact: stellarmatrixai@gmail.com</p>
+      <!-- Set "Last updated" to the calendar date on which this page is published (merge to main). Do not merge until a Firebase-enabled build is approved. -->
+      <p class="meta">Last updated: [publish date] · App: com.briteenceladus.bptracker · Contact: stellarmatrixai@gmail.com</p>
     </div>
   </header>
   <main class="wrap">
@@ -37,10 +38,10 @@
       Quenly does not diagnose, treat, cure, or prevent any medical condition.
       Talk to a licensed clinician about your readings.
     </div>
-    <p>You enter wellness data (blood pressure, heart rate, glucose, medications, notes). That health data is encrypted on your device (AES-256-GCM). Quenly does not operate a server-side database of your readings.</p>
-    <p>Optional features may contact third parties for identity, purchases, or app updates. Those paths do not send your health readings to Apple, Google, or Quenly servers.</p>
+    <p>You enter wellness data (blood pressure, heart rate, glucose, medications, notes). That health data is encrypted on your device (AES-256-GCM). It stays on your device unless you turn on Encrypted Cloud Sync, an optional Quenly Pro feature on iOS. Encrypted Cloud Sync stores an end-to-end encrypted copy on Supabase. Quenly cannot read those readings.</p>
+    <p>Optional features may contact third parties for identity, purchases, app updates, or — if you turn it on — anonymous usage and crash data. Billing, sign-in, app updates, and usage reporting do not send your health readings to Apple, Google, or Quenly. Encrypted Cloud Sync uploads only data that has already been encrypted on your device, as described below.</p>
     <h2>1. Data you enter (on-device)</h2>
-    <p>Stored only on your device, encrypted at rest with AES-256-GCM:</p>
+    <p>Stored on your device, encrypted at rest with AES-256-GCM. If you turn on Encrypted Cloud Sync, an end-to-end encrypted copy is also stored, as described in section 4. Otherwise this data stays only on your device:</p>
     <ul>
       <li>Blood pressure and heart rate readings (systolic, diastolic, pulse, timestamp, optional notes)</li>
       <li>Glucose readings (value, context tags, timestamp, optional notes)</li>
@@ -49,11 +50,12 @@
       <li>Encryption material needed to protect the above (salt + password verifier)</li>
     </ul>
     <p>Your master password is never stored in plaintext. Biometric unlock (Face ID / fingerprint) is a local convenience feature only; it is not a cryptographic root of trust. There is no password recovery. If you forget the master password, encrypted data cannot be recovered.</p>
-    <h2>2. Optional Google Sign-In</h2>
-    <p>If you choose Sign in with Google, Google OAuth provides identity information such as email, name, and subject (sub) to the app on your device. This is for optional account identity only.</p>
+    <h2>2. Optional sign-in (Google or Apple)</h2>
+    <p>If you choose Sign in with Google (Android), Google OAuth provides identity information such as email, name, and subject (sub) to the app on your device. This is for optional account identity only.</p>
+    <p>If you choose Sign in with Apple (iOS), the Apple user ID and any name or email Apple shares on first sign-in can be saved on this device for optional account identity. If you also turn on Encrypted Cloud Sync, Sign in with Apple is used to operate that service, as described in section 4.</p>
     <ul>
-      <li>Health readings are not uploaded to Google or to Quenly servers as part of sign-in.</li>
-      <li>Google Sign-In does not replace your master password for unlocking encrypted local data.</li>
+      <li>Health readings are not uploaded to Apple, Google, or Quenly as part of sign-in itself.</li>
+      <li>Sign-in does not replace your master password for unlocking encrypted local data.</li>
     </ul>
     <h2>3. Optional Quenly Pro (App Store / Google Play)</h2>
     <p>If you purchase Quenly Pro, billing is handled by the store you bought from — the Apple App Store or Google Play Billing. The store processes the payment and purchase tokens. The app keeps a local premium flag so Pro features unlock on your device.</p>
@@ -61,31 +63,56 @@
       <li>Health readings are not sent to Apple, Google, or Quenly as part of billing.</li>
       <li>Manage or cancel a subscription in your Apple ID or Google account settings (not inside Quenly).</li>
     </ul>
-    <h2>4. Expo Updates (OTA)</h2>
+    <h2>4. Optional Encrypted Cloud Sync (iOS, Quenly Pro)</h2>
+    <p>Encrypted Cloud Sync is an optional Quenly Pro feature on iOS. It is off unless you turn it on. It is not available on Android or on the web.</p>
+    <p>If you turn it on, you sign in with Apple and the app uploads an end-to-end encrypted copy of your readings and related vault data to Supabase, the cloud service Quenly uses for sync. Each record is encrypted on your device with your vault key (AES-256-GCM) before it is sent. The server stores ciphertext, a random id, and a timestamp. Quenly cannot read your readings. Your master password is not uploaded.</p>
+    <p>You can restore your data on another iPhone or after reinstalling by signing in with the same Apple ID and entering your app password. You can permanently delete your encrypted cloud copy and sync account in Settings → Encrypted Cloud Sync → Delete cloud account. Data on the phone is kept unless you also clear it.</p>
+    <h2>5. Expo Updates (OTA)</h2>
     <p>The app may contact Expo servers to check for and download JavaScript/asset updates (EAS Update). That traffic is for app updates, not for uploading your health readings.</p>
-    <h2>5. Parked AI insights (currently off)</h2>
-    <p>An optional AI insights feature is disabled in this build (<code>AI_INSIGHTS_AVAILABLE = false</code>). It is not active today. If it were ever enabled and you opted in, the app would send a minimal anonymized numbers-only summary from your device. That path is not on.</p>
-    <h2>6. What we do not do</h2>
+    <h2>6. Optional anonymous usage and crash data (mobile apps)</h2>
+    <p>The iOS and Android apps include an optional setting: Settings → Privacy → <strong>Share anonymous usage and crash data</strong>. It is off by default. It applies only to the mobile apps, not to the web app. Nothing is sent to Google Firebase until you turn this setting on.</p>
+    <p>This feature is powered by Google Firebase Analytics, Crashlytics, Remote Config, and App Check.</p>
+    <p>When the setting is on, Quenly may send:</p>
     <ul>
-      <li>No advertising SDKs</li>
-      <li>No analytics or crash-reporting SDKs bundled for product analytics</li>
-      <li>No Quenly backend database that stores your health readings</li>
-      <li>No sale of personal health data</li>
+      <li>Paywall and purchase interaction events from a fixed list: <code>paywall_view</code>, <code>plan_select</code>, purchase start / success / cancel / error (with a normalized error code), and restore.</li>
+      <li>Standard Firebase events, including first open and session start.</li>
+      <li>Crash reports, with error messages redacted.</li>
+      <li>Device and app information.</li>
+      <li>A random app instance ID. This is not your Apple ID, email, or any other account identifier.</li>
+      <li>App Check device attestation tokens (Apple App Attest on iOS, Google Play Integrity on Android).</li>
+      <li>On Android, Google’s automatic <code>in_app_purchase</code> event, which may include product ID, price, and currency.</li>
     </ul>
-    <h2>7. Exports you initiate</h2>
+    <p>Firebase may infer a coarse location from the IP address.</p>
+    <p>Quenly never sends blood pressure, pulse, or glucose readings, notes, medications, reading dates or counts, vault data, or your Apple ID or email to Firebase.</p>
+    <p>This data is not linked to your identity and is not used for advertising or tracking. The apps do not collect an IDFA (Identifier for Advertisers). Ad personalization is off. This data is never sold.</p>
+    <p>Firebase Remote Config may change which subscription plan is preselected on the paywall for users who have opted in. People who leave the setting off always see the default paywall.</p>
+    <p>You can turn the setting off at any time. That stops collection and deletes unsent crash reports.</p>
+    <p>Google’s information about how Firebase processes data is at <a href="https://firebase.google.com/support/privacy">firebase.google.com/support/privacy</a>.</p>
+    <h2>7. Parked AI insights (currently off)</h2>
+    <p>An optional AI insights feature is disabled in this build (<code>AI_INSIGHTS_AVAILABLE = false</code>). It is not active today. If it were ever enabled and you opted in, the app would send a minimal anonymized numbers-only summary from your device. That path is not on.</p>
+    <h2>8. What we do not do</h2>
+    <ul>
+      <li>No advertising SDKs, no IDFA, and no ad personalization or tracking</li>
+      <li>No analytics or crash reporting unless you turn on Share anonymous usage and crash data, as described above</li>
+      <li>No sale of personal data, including health data</li>
+      <li>No Quenly database that stores your health readings in readable form. Encrypted Cloud Sync stores only end-to-end encrypted ciphertext, as described above</li>
+    </ul>
+    <h2>9. Exports you initiate</h2>
     <p>CSV, PDF, and encrypted backup exports happen only when you start them. Exported files leave the app’s encrypted store under your control. CSV exports are plaintext for spreadsheet use — you are responsible for those files.</p>
-    <h2>8. Deletion</h2>
+    <h2>10. Deletion</h2>
     <ul>
       <li>In-app: Settings → Clear All Data</li>
-      <li>Uninstall: removing the app removes its local data on the device (subject to normal OS behavior)</li>
+      <li>Share anonymous usage and crash data: turn the setting off in Settings → Privacy to stop collection and delete unsent crash reports</li>
+      <li>Encrypted Cloud Sync: Settings → Encrypted Cloud Sync → Delete cloud account removes your encrypted cloud copy and sync account. Data on the phone is kept</li>
+      <li>Uninstall: removing the app removes its local data on the device (subject to normal OS behavior). It does not by itself delete an Encrypted Cloud Sync copy</li>
     </ul>
-    <h2>9. Children</h2>
+    <h2>11. Children</h2>
     <p>Quenly is not directed at children under 13. We do not knowingly collect personal information from children under 13.</p>
-    <h2>10. Not a medical device</h2>
+    <h2>12. Not a medical device</h2>
     <p>Quenly is a personal wellness and logging tool only. Category labels and charts are educational aids for reviewing your own log. They are not a diagnosis.</p>
-    <h2>11. Changes</h2>
+    <h2>13. Changes</h2>
     <p>If this policy changes, the “Last updated” date will be revised. Continued use after changes constitutes acceptance of the updated policy.</p>
-    <h2>12. Contact</h2>
+    <h2>14. Contact</h2>
     <p><a href="mailto:stellarmatrixai@gmail.com">stellarmatrixai@gmail.com</a></p>
     <footer>App Store Connect / Play Console: paste this page URL into the privacy policy field. Host it as public HTML (not a PDF), without a geo-block or login wall.</footer>
   </main>
