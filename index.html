@@ -75,19 +75,20 @@
     <p>When the setting is on, Quenly may send:</p>
     <ul>
       <li>Paywall and purchase interaction events from a fixed list: <code>paywall_view</code>, <code>plan_select</code>, purchase start / success / cancel / error (with a normalized error code), and restore.</li>
+      <li>On Android, Google also automatically logs in-app purchase events (<code>in_app_purchase</code>), including the product ID, price, and currency.</li>
       <li>Standard Firebase events, including first open and session start.</li>
       <li>Crash reports, with error messages redacted.</li>
       <li>Device and app information.</li>
       <li>A random app instance ID. This is not your Apple ID, email, or any other account identifier.</li>
       <li>App Check device attestation tokens (Apple App Attest on iOS, Google Play Integrity on Android).</li>
-      <li>On Android, Google’s automatic <code>in_app_purchase</code> event, which may include product ID, price, and currency.</li>
     </ul>
-    <p>Firebase may infer a coarse location from the IP address.</p>
+    <p>These paywall and purchase interaction events, including Android’s automatic in-app purchase events, are tied to a random app instance ID and not to your identity.</p>
+    <p>Google may infer an approximate (coarse) location, such as country or city, from the IP address. Quenly never collects precise location.</p>
     <p>Quenly never sends blood pressure, pulse, or glucose readings, notes, medications, reading dates or counts, vault data, or your Apple ID or email to Firebase.</p>
     <p>This data is not linked to your identity and is not used for advertising or tracking. The apps do not collect an IDFA (Identifier for Advertisers). Ad personalization is off. This data is never sold.</p>
     <p>Firebase Remote Config may change which subscription plan is preselected on the paywall for users who have opted in. People who leave the setting off always see the default paywall.</p>
     <p>You can turn the setting off at any time. That stops collection and deletes unsent crash reports.</p>
-    <p>Google’s information about how Firebase processes data is at <a href="https://firebase.google.com/support/privacy">firebase.google.com/support/privacy</a>.</p>
+    <p>Google LLC / Firebase processes this optional data on Quenly’s behalf as a service provider (data processor) under Google’s Firebase terms. Firebase Crashlytics keeps crash data for 90 days. Analytics data retention can be set to 2 months or 14 months; the default is 2 months. Other data in this feature is kept per Google’s retention settings. Google’s information about how Firebase processes data is at <a href="https://firebase.google.com/support/privacy">firebase.google.com/support/privacy</a>.</p>
     <h2>7. Parked AI insights (currently off)</h2>
     <p>An optional AI insights feature is disabled in this build (<code>AI_INSIGHTS_AVAILABLE = false</code>). It is not active today. If it were ever enabled and you opted in, the app would send a minimal anonymized numbers-only summary from your device. That path is not on.</p>
     <h2>8. What we do not do</h2>
