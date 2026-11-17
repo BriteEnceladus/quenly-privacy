@@ -65,7 +65,8 @@
     </ul>
     <h2>4. Optional Encrypted Cloud Sync (iOS, Quenly Pro)</h2>
     <p>Encrypted Cloud Sync is an optional Quenly Pro feature on iOS. It is off unless you turn it on. It is not available on Android or on the web.</p>
-    <p>If you turn it on, you sign in with Apple and the app uploads an end-to-end encrypted copy of your readings and related vault data to Supabase, the cloud service Quenly uses for sync. Each record is encrypted on your device with your vault key (AES-256-GCM) before it is sent. The server stores ciphertext, a random id, and a timestamp. Quenly cannot read your readings. Your master password is not uploaded.</p>
+    <p>If you turn it on, you sign in with Apple and the app uploads an end-to-end encrypted copy of your readings and related vault data to Supabase, the cloud service Quenly uses for sync. Each record is encrypted on your device with your vault key (AES-256-GCM) before it is sent. The server stores ciphertext, a random id, and a timestamp for each encrypted record. Your sync account stores your Apple user ID and any email or name Apple shares with Quenly, so we can operate and delete your account. Quenly cannot read your readings. Your master password is not uploaded.</p>
+    <p>Supabase processes this data on Quenly’s behalf as a service provider (data processor), hosting your sync account and your encrypted data.</p>
     <p>You can restore your data on another iPhone or after reinstalling by signing in with the same Apple ID and entering your app password. You can permanently delete your encrypted cloud copy and sync account in Settings → Encrypted Cloud Sync → Delete cloud account. Data on the phone is kept unless you also clear it.</p>
     <h2>5. Expo Updates (OTA)</h2>
     <p>The app may contact Expo servers to check for and download JavaScript/asset updates (EAS Update). That traffic is for app updates, not for uploading your health readings.</p>
